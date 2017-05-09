@@ -48,6 +48,9 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback {
 
     private var polylineWidth: Float = 30F
 
+    private val localBroadacstManager: LocalBroadcastManager
+            by lazy { LocalBroadcastManager.getInstance(this) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
@@ -63,7 +66,7 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback {
     override fun onDestroy() {
         super.onDestroy()
         unbindService(serviceConnection)
-        unregisterReceiver(locationUpdateReceiver)
+        localBroadacstManager.unregisterReceiver(locationUpdateReceiver)
     }
 
     override fun onMapReady(googleMap: com.google.android.gms.maps.GoogleMap) {
@@ -92,7 +95,7 @@ class MapsActivity : FragmentActivity(), OnMapReadyCallback {
 //                zoomMapTo(location)
             }
         }
-        LocalBroadcastManager.getInstance(this)
+        localBroadacstManager
                 .registerReceiver(locationUpdateReceiver, IntentFilter(LocationService.INTENT_LOCATION_UPDATED))
     }
 

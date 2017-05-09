@@ -67,8 +67,8 @@ class LocationService : Service(), LocationListener {
         Log.d(TAG, locationData.toString())
 
         if (location != null) {
-            locationList.add(location)
-//            filterAndAddLocation(location)
+//            locationList.add(location)
+            filterAndAddLocation(location)
         }
 
         val intent = Intent(INTENT_LOCATION_UPDATED)
@@ -110,7 +110,7 @@ class LocationService : Service(), LocationListener {
 
         Log.d(TAG, "Location quality is good enough.")
         currentSpeed = location.speed
-//        locationList.add(location)
+        locationList.add(location)
 
 
         return true
